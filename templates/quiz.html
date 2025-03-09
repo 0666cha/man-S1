@@ -65,7 +65,7 @@
             text-decoration: underline;
         }
         .feedback {
-            margin-top: 20px;
+            margin-bottom: 20px; /* Adjusted to add space below feedback */
             padding: 10px;
             border-radius: 5px;
             font-size: 1.2rem;
@@ -83,6 +83,14 @@
 <body>
     <div class="quiz-container">
         <h1 class="text-center">MCQ Quiz</h1>
+        
+        <!-- Feedback moved to the top -->
+        {% if feedback %}
+            <div class="feedback {{ feedback.type }}">
+                {{ feedback.message }}
+            </div>
+        {% endif %}
+
         <div class="question">{{ question["question"] }}</div>
         <form action="/check" method="post" class="options">
             {% for option in question["options"] %}
@@ -97,11 +105,6 @@
             <p>Correct: {{ correct_count }}</p>
             <p>Wrong: {{ wrong_count }}</p>
         </div>
-        {% if feedback %}
-            <div class="feedback {{ feedback.type }}">
-                {{ feedback.message }}
-            </div>
-        {% endif %}
         <a href="/reset" class="reset-link">Reset Quiz</a>
     </div>
 </body>
